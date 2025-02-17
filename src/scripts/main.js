@@ -10,7 +10,7 @@ function sortTable(e) {
     return;
   }
 
-  const sortBy = e.target.textContent.toLowerCase();
+  const sortBy = e.target.dataset.name;
   const data = createDataObject();
   const sortedData = sortData(data, sortBy);
 
@@ -18,13 +18,13 @@ function sortTable(e) {
     return (
       prev +
       `
-      <tr>
-        <td>${elem.name}</td>
-        <td>${elem.position}</td>
-        <td>${elem.age}</td>
-        <td>${elem.salary}</td>
-      </tr>
-    `
+        <tr>
+          <td>${elem.name}</td>
+          <td>${elem.position}</td>
+          <td>${elem.age}</td>
+          <td>${formatSalary(elem.salary)}</td>
+        </tr>
+      `
     );
   }, '');
 
@@ -57,4 +57,18 @@ function sortData(data, sortBy) {
 
     return p1[sortBy] - p2[sortBy];
   });
+}
+
+function formatSalary(salary) {
+  const str = `${salary}`;
+  let res = '';
+  for (let i = str.length - 1; i >= 0; i--) {
+    res = str[i] + res;
+
+    if ((i % 3 === 0) && (i !== 0)) {
+      res = ',' + res;
+    }
+  }
+
+  return '$' + res;
 }
