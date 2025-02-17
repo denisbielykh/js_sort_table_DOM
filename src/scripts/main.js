@@ -62,13 +62,14 @@ function sortData(data, sortBy) {
 function formatSalary(salary) {
   const str = `${salary}`;
   let res = '';
+
   for (let i = str.length - 1; i >= 0; i--) {
     res = str[i] + res;
 
-    if ((i % 3 === 0) && (i !== 0)) {
+    if (i % 3 === 0 && i !== 0) {
       res = ',' + res;
     }
   }
 
   return '$' + res;
-}
+};
